@@ -19,9 +19,9 @@ from django.urls import path, include
 from django.views.generic.base import TemplateView
 
 urlpatterns = [
-    path('', TemplateView.as_view(template_name='base/index.html'), name='home'),
-    path('resume/', TemplateView.as_view(template_name='base/resume.html'), name='resume'),
-    path('projects/', TemplateView.as_view(template_name='base/projects.html'), name='projects'),
+    path('', include('resume.urls')),
+    # path('resume/', TemplateView.as_view(template_name='base/resume.html'), name='resume'),
+    # path('projects/', TemplateView.as_view(template_name='base/projects.html'), name='projects'),
     path('contact/', TemplateView.as_view(template_name='base/contact.html'), name='contact'),
     path('admin/', admin.site.urls),
     path('tracker/', include('tracker.urls'))
