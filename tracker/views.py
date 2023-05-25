@@ -42,8 +42,8 @@ class AddPrescriptionView(LoginRequiredMixin, CreateView):
     template_name = 'tracker/add_prescription.html'
     fields = [
         'name', 'description', 'dosage', 'dosage_unit', 
-        'frequency', 'frequency_period']
-    success_url = '/dashboard/'
+        'frequency', 'frequency_period', 'start_date', 'end_date']
+    success_url = '/tracker/dashboard/'
 
     def form_valid(self, form):
         # This method is called when valid form data has been POSTed.

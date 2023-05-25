@@ -1,18 +1,28 @@
 {% extends 'tracker/base.html' %}
 
 {% block body %}
-<main class="px-3 home-bg">
-    <h1>WELCOME</h1>
-    <h2>Prescription List</h2>
-    <ol>
-        {% for pres in object_list %}
-        <li>
-            {{ pres.dosage }}{{ pres.dosage_unit }} of 
-            {{ pres.name}} {{ pres.frequency }} times a 
-            {{ pres.frequency_period }}
-        </li>
-        {% endfor %}
-    </ol>
-    <a href="{% url 'tracker:add' %}">Add New</a>
-</main>
+<section class="py-5">
+    <div class="container px-5">
+        <div class="bg-light rounded-4 py-5 px-4 px-md-5">
+            <div class="text-center mb-5">
+                <div class="feature bg-primary bg-gradient-primary-to-secondary text-white rounded-3 mb-3"><i
+                        class="bi bi-envelope"></i></div>
+                <h1 class="fw-bolder">WELCOME</h1>
+                <p class="lead fw-normal text-muted mb-0">Track your prescriptions!</p>
+            </div>
+
+            <h2>Prescription List</h2>
+            <ol>
+                {% for pres in object_list %}
+                <li>
+                    {{ pres.dosage }} {{ pres.dosage_unit }} of 
+                    {{ pres.name}} {{ pres.frequency }} times a 
+                    {{ pres.frequency_period }}
+                </li>
+                {% endfor %}
+            </ol>
+            <a href="{% url 'tracker:add' %}">Add New</a>
+        </div>
+    </div>
+</section>
 {% endblock %}

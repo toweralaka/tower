@@ -33,8 +33,8 @@ class Prescription(models.Model):
     frequency = models.DecimalField(default=1.0, max_digits=5, decimal_places=2)
     #decimal field to allow for fractions
     frequency_period = models.CharField(max_length=7, choices=PERIOD)
-    start_date = models.DateField()
-    end_date = models.DateField()
+    start_date = models.DateField(help_text='mm/dd/yyyy')
+    end_date = models.DateField(help_text='mm/dd/yyyy')
 
     def __str__(self):
         return self.name
