@@ -18,7 +18,7 @@ class RegisterView(View):
 
     def get(self, request, *args, **kwargs):
         form = RegisterForm()
-        return render(request, 'register.html', {'form': form})
+        return render(request, 'tracker/register.html', {'form': form})
         
     def post(self, request, *args, **kwargs):
         form = RegisterForm(request.POST)
@@ -30,7 +30,7 @@ class RegisterView(View):
             user = authenticate(username=username, password=raw_password)
             login(request, user)
             return redirect(self.success_url)
-        return render(request, 'register.html', {'form': form})
+        return render(request, 'tracker/register.html', {'form': form})
 
 
 

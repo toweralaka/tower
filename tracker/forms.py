@@ -5,6 +5,12 @@ from django.contrib.auth.forms import UserCreationForm
 User = get_user_model()
 
 class RegisterForm(UserCreationForm):
+    username = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control'}))
+    password1 = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control'}))
+    password2 = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control'}))
+    first_name = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control'}))
+    last_name = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control'}))
+    email = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control'}))
     # first_name = forms.CharField(max_length=30, required=False, help_text='Optional.')
     # last_name = forms.CharField(max_length=30, required=False, help_text='Optional.')
     # email = forms.EmailField(max_length=254, help_text='Required. Inform a valid email address.')
