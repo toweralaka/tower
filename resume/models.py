@@ -24,6 +24,17 @@ class Experience(models.Model):
         return f'{self.position} at {self.name}'
 
 
+class Education(models.Model):
+    institution = models.CharField(max_length=255)
+    location = models.CharField(max_length=255)
+    discipline = models.CharField(max_length=300)
+    description = models.TextField()
+    start_date = models.DateField()
+    end_date = models.DateField()
+    
+    def __str__(self):
+        return f'{self.position} at {self.name}'
+
 class Project(models.Model):
     name = models.CharField(max_length=500)
     url = models.URLField()
@@ -33,3 +44,20 @@ class Project(models.Model):
     def __str__(self):
         return self.name
 
+
+
+class Skill(models.Model):
+    name = models.CharField(max_length=255)
+    description = models.TextField()
+
+    def __str__(self):
+        return self.name
+
+
+class Language(models.Model):
+    name = models.CharField(max_length=255)
+    start_date = models.DateField()
+
+    def __str__(self):
+        return self.name
+        
