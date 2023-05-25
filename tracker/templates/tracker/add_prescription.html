@@ -12,13 +12,6 @@
             </div>
             <div class="row gx-5 justify-content-center">
                 <div class="col-lg-8 col-xl-6">
-                    <ul>
-                        {% for error in form.errors %}
-                        <li>
-                            {{ error }}
-                        </li>
-                        {% endfor %}
-                    </ul>
                     <form method="post">{% csrf_token %}
                         {% for field in form %}
                         <div class="form-floating mb-3">
