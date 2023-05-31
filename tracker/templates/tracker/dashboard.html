@@ -19,6 +19,8 @@
                     {{ pres.name}} {{ pres.frequency }} times a 
                     {{ pres.frequency_period }}
                 </li>
+                {% empty %}
+                <li>You do not have prescriptions.</li>
                 {% endfor %}
             </ol>
             <a href="{% url 'tracker:add' %}">Add New</a>

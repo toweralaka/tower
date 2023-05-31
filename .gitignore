@@ -1,3 +1,4 @@
 towerenv/
 .env
 __pycache__/
+htmlcov/
