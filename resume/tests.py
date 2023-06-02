@@ -43,3 +43,30 @@ class SkillModelTests(TestCase):
 
 
 
+class ResumeViewTest(TestCase):
+
+    def test_resume_view(self):
+        response = self.client.get(reverse("resume:resume"))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Dowload Resume")
+        self.assertTemplateUsed(response, 'resume/resume.html')
+
+    def test_no_experiences(self):
+        response = self.client.get(reverse("resume:resume"))
+        self.assertContains(response, "No experience has been uploaded")
+    
+    def test_no_skills(self):
+        response = self.client.get(reverse("resume:resume"))
+        self.assertContains(response, "No skill has been uploaded")
+
+    def test_no_education(self):
+        response = self.client.get(reverse("resume:resume"))
+        self.assertContains(response, "No education has been uploaded")
+
+
+class ProjectViewTest(TestCase):
+
+    def test_projects_view(self):
+        response = self.client.get(reverse("resume:projects"))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'resume/projects.html')
