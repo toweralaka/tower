@@ -6,6 +6,7 @@ from resume.views import resume, projects
 
 urlpatterns = [
     path('', TemplateView.as_view(template_name='base/index.html'), name='home'),
+    path('about/', TemplateView.as_view(template_name='resume/about.html'), name='about'),
     path('resume/', resume, name='resume'),
     path('projects/', projects, name='projects'),
 ]

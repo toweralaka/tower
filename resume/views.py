@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from resume.models import Bio, Experience, Project
+from resume.models import Bio, Education, Experience, Language, Project, Skill
 
 # Create your views here.
 
@@ -12,7 +12,9 @@ def projects(request):
 def resume(request):
     context = {
         'experiences': Experience.objects.all(),
-        'bio': Bio.objects.all()
+        'education_list': Education.objects.all(),
+        'skill': Skill.objects.all(),
+        'languages': Language.objects.all()
     }
     return render(request, 'resume/resume.html', context)
     
