@@ -18,92 +18,131 @@
                             Download Resume
                         </a>
                     </div>
-                    <!-- Experience Card 1-->
+                    {% for experience in experiences %}
+                    <!-- Experience Card -->
                     <div class="card shadow border-0 rounded-4 mb-5">
                         <div class="card-body p-5">
                             <div class="row align-items-center gx-5">
                                 <div class="col text-center text-lg-start mb-4 mb-lg-0">
                                     <div class="bg-light p-4 rounded-4">
-                                        <div class="text-primary fw-bolder mb-2">2019 - Present</div>
-                                        <div class="small fw-bolder">Web Developer</div>
-                                        <div class="small text-muted">Stark Industries</div>
-                                        <div class="small text-muted">Los Angeles, CA</div>
+                                        <div class="text-primary fw-bolder mb-2">
+                                            {{ experience.start_date|date:"M Y" }} - 
+                                            {% if experience.still_work_here %}
+                                                Present
+                                            {% else %}
+                                                {{ experience.end_date|date:"M Y" }}
+                                            {% endif %}
+                                            {% if experience.is_seasonal %}
+                                                <span>(Seasonal)</span>
+                                            {% endif %}
+                                        </div>
+                                        <div class="small fw-bolder">{{ experience.position }}</div>
+                                        <div class="small text-muted">{{ experience.company }}</div>
                                     </div>
                                 </div>
-                                <div class="col-lg-8"><div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus laudantium, voluptatem quis repellendus eaque sit animi illo ipsam amet officiis corporis sed aliquam non voluptate corrupti excepturi maxime porro fuga.</div></div>
+                                <div class="col-lg-8">
+                                    <div>
+                                        {{ experience.description }}
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <!-- Experience Card 2-->
+                    {% empty %}
+                    <!-- Experience Card empty-->
                     <div class="card shadow border-0 rounded-4 mb-5">
                         <div class="card-body p-5">
                             <div class="row align-items-center gx-5">
                                 <div class="col text-center text-lg-start mb-4 mb-lg-0">
                                     <div class="bg-light p-4 rounded-4">
-                                        <div class="text-primary fw-bolder mb-2">2017 - 2019</div>
-                                        <div class="small fw-bolder">SEM Specialist</div>
-                                        <div class="small text-muted">Wayne Enterprises</div>
-                                        <div class="small text-muted">Gotham City, NY</div>
+                                        <div class="text-primary fw-bolder mb-2">&nbsp;</div>
+                                        <div class="small fw-bolder">&nbsp;</div>
+                                        <div class="small text-muted">&nbsp;</div>
                                     </div>
                                 </div>
-                                <div class="col-lg-8"><div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus laudantium, voluptatem quis repellendus eaque sit animi illo ipsam amet officiis corporis sed aliquam non voluptate corrupti excepturi maxime porro fuga.</div></div>
+                                <div class="col-lg-8">
+                                    <div>
+                                        No experience has been uploaded.
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    {% endfor %}
                 </section>
                 <!-- Education Section-->
                 <section>
                     <h2 class="text-secondary fw-bolder mb-4">Education</h2>
-                    <!-- Education Card 1-->
+                    {% for education in education_list %}
+                    <!-- Education Card -->
                     <div class="card shadow border-0 rounded-4 mb-5">
                         <div class="card-body p-5">
                             <div class="row align-items-center gx-5">
                                 <div class="col text-center text-lg-start mb-4 mb-lg-0">
                                     <div class="bg-light p-4 rounded-4">
-                                        <div class="text-secondary fw-bolder mb-2">2015 - 2017</div>
+                                        <div class="text-secondary fw-bolder mb-2">
+                                            {{ education.start_date|date:"M Y" }} -
+                                            {% if education.still_in_progress %}
+                                                Present
+                                            {% else %}
+                                                {{ education.end_date|date:"M Y" }}
+                                            {% endif %}
+                                        </div>
                                         <div class="mb-2">
-                                            <div class="small fw-bolder">Barnett College</div>
-                                            <div class="small text-muted">Fairfield, NY</div>
+                                            <div class="small fw-bolder">{{ education.institution }}</div>
+                                            <div class="small text-muted">{{ education.location }}</div>
                                         </div>
                                         <div class="fst-italic">
-                                            <div class="small text-muted">Master's</div>
-                                            <div class="small text-muted">Web Development</div>
+                                            <div class="small text-muted">{{ education.award }}</div>
+                                            <div class="small text-muted">{{ education.course }}</div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-8"><div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus laudantium, voluptatem quis repellendus eaque sit animi illo ipsam amet officiis corporis sed aliquam non voluptate corrupti excepturi maxime porro fuga.</div></div>
+                                <div class="col-lg-8">
+                                    <div>
+                                        {{ education.description }}
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <!-- Education Card 2-->
+                    {% empty %}
+                    <!-- Education Card empty-->
                     <div class="card shadow border-0 rounded-4 mb-5">
                         <div class="card-body p-5">
                             <div class="row align-items-center gx-5">
                                 <div class="col text-center text-lg-start mb-4 mb-lg-0">
                                     <div class="bg-light p-4 rounded-4">
-                                        <div class="text-secondary fw-bolder mb-2">2011 - 2015</div>
+                                        <div class="text-secondary fw-bolder mb-2">&nbsp;</div>
                                         <div class="mb-2">
-                                            <div class="small fw-bolder">ULA</div>
-                                            <div class="small text-muted">Los Angeles, CA</div>
+                                            <div class="small fw-bolder">&nbsp;</div>
+                                            <div class="small text-muted">&nbsp;</div>
                                         </div>
                                         <div class="fst-italic">
-                                            <div class="small text-muted">Undergraduate</div>
-                                            <div class="small text-muted">Computer Science</div>
+                                            <div class="small text-muted">&nbsp;</div>
+                                            <div class="small text-muted">&nbsp;</div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-8"><div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus laudantium, voluptatem quis repellendus eaque sit animi illo ipsam amet officiis corporis sed aliquam non voluptate corrupti excepturi maxime porro fuga.</div></div>
+                                <div class="col-lg-8">
+                                    <div>
+                                        No education has been uploaded.
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    {% endfor %}
                 </section>
                 <!-- Divider-->
                 <div class="pb-5"></div>
+                {% if skills or languages %}
                 <!-- Skills Section-->
                 <section>
                     <!-- Skillset Card-->
                     <div class="card shadow border-0 rounded-4 mb-5">
                         <div class="card-body p-5">
+                            {% if skills %}
                             <!-- Professional skills list-->
                             <div class="mb-5">
                                 <div class="d-flex align-items-center mb-4">
@@ -111,16 +150,21 @@
                                     <h3 class="fw-bolder mb-0"><span class="text-gradient d-inline">Professional Skills</span></h3>
                                 </div>
                                 <div class="row row-cols-1 row-cols-md-3 mb-4">
-                                    <div class="col mb-4 mb-md-0"><div class="d-flex align-items-center bg-light rounded-4 p-3 h-100">SEO/SEM Marketing</div></div>
-                                    <div class="col mb-4 mb-md-0"><div class="d-flex align-items-center bg-light rounded-4 p-3 h-100">Statistical Analysis</div></div>
-                                    <div class="col"><div class="d-flex align-items-center bg-light rounded-4 p-3 h-100">Web Development</div></div>
-                                </div>
-                                <div class="row row-cols-1 row-cols-md-3">
-                                    <div class="col mb-4 mb-md-0"><div class="d-flex align-items-center bg-light rounded-4 p-3 h-100">Network Security</div></div>
-                                    <div class="col mb-4 mb-md-0"><div class="d-flex align-items-center bg-light rounded-4 p-3 h-100">Adobe Software Suite</div></div>
-                                    <div class="col"><div class="d-flex align-items-center bg-light rounded-4 p-3 h-100">User Interface Design</div></div>
-                                </div>
+                                    {% for skill in skills %}
+                                        {% if forloop.counter|divisibleby:3 %}
+                                            <div class="col">
+                                                <div class="d-flex align-items-center bg-light rounded-4 p-3 h-100">{{ skill.name }}</div>
+                                            </div></div>
+                                            {% if forloop.counter != skills.count %}
+                                                <div class="row row-cols-1 row-cols-md-3 mb-4">
+                                            {% endif %}
+                                        {% else %}
+                                        <div class="col mb-4 mb-md-0"><div class="d-flex align-items-center bg-light rounded-4 p-3 h-100">{{ skill.name }}</div></div>
+                                        {% endif %}
+                                    {% endfor %}
                             </div>
+                            {% endif %}
+                            {% if languages %}
                             <!-- Languages list-->
                             <div class="mb-0">
                                 <div class="d-flex align-items-center mb-4">
@@ -128,19 +172,30 @@
                                     <h3 class="fw-bolder mb-0"><span class="text-gradient d-inline">Languages</span></h3>
                                 </div>
                                 <div class="row row-cols-1 row-cols-md-3 mb-4">
-                                    <div class="col mb-4 mb-md-0"><div class="d-flex align-items-center bg-light rounded-4 p-3 h-100">HTML</div></div>
-                                    <div class="col mb-4 mb-md-0"><div class="d-flex align-items-center bg-light rounded-4 p-3 h-100">CSS</div></div>
-                                    <div class="col"><div class="d-flex align-items-center bg-light rounded-4 p-3 h-100">JavaScript</div></div>
-                                </div>
-                                <div class="row row-cols-1 row-cols-md-3">
-                                    <div class="col mb-4 mb-md-0"><div class="d-flex align-items-center bg-light rounded-4 p-3 h-100">Python</div></div>
-                                    <div class="col mb-4 mb-md-0"><div class="d-flex align-items-center bg-light rounded-4 p-3 h-100">Ruby</div></div>
-                                    <div class="col"><div class="d-flex align-items-center bg-light rounded-4 p-3 h-100">Node.js</div></div>
-                                </div>
+                                    {% for language in languages %}
+                                        {% if forloop.counter|divisibleby:3 %}
+                                        <div class="col">
+                                            <div class="d-flex align-items-center bg-light rounded-4 p-3 h-100">{{ language.name }}</div>
+                                        </div>
+                                    </div>
+                                            {% if forloop.counter != languages.count %}
+                                            <div class="row row-cols-1 row-cols-md-3 mb-4">
+                                            {% endif %}
+                                        {% else %}
+                                            <div class="col mb-4 mb-md-0">
+                                                <div class="d-flex align-items-center bg-light rounded-4 p-3 h-100">{{ language.name }}</div>
+                                            </div>
+                                            {% if forloop.counter == languages.count %}
+                                            </div>
+                                            {% endif %}
+                                        {% endif %}
+                                    {% endfor %}
                             </div>
+                            {% endif %}
                         </div>
                     </div>
                 </section>
+                {% endif %}
             </div>
         </div>
     </div>
