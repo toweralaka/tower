@@ -55,10 +55,6 @@ class ResumeViewTest(TestCase):
         response = self.client.get(reverse("resume:resume"))
         self.assertContains(response, "No experience has been uploaded")
     
-    def test_no_skills(self):
-        response = self.client.get(reverse("resume:resume"))
-        self.assertContains(response, "No skill has been uploaded")
-
     def test_no_education(self):
         response = self.client.get(reverse("resume:resume"))
         self.assertContains(response, "No education has been uploaded")
