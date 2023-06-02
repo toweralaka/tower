@@ -19,6 +19,8 @@ class Experience(models.Model):
     description = models.TextField()
     start_date = models.DateField()
     end_date = models.DateField()
+    still_work_here = models.BooleanField(default=False)
+    is_seasonal = models.BooleanField(default=False)
     
     def __str__(self):
         return f'{self.position} at {self.company}'
@@ -32,9 +34,11 @@ class Education(models.Model):
     description = models.TextField()
     start_date = models.DateField()
     end_date = models.DateField()
+    still_in_progress = models.BooleanField(default=False)
     
     def __str__(self):
         return f'{self.award} {self.discipline} from {self.institution}'
+
 
 class Project(models.Model):
     name = models.CharField(max_length=500)
@@ -61,4 +65,4 @@ class Language(models.Model):
 
     def __str__(self):
         return self.name
-        
+
