@@ -29,7 +29,7 @@ class Experience(models.Model):
 class Education(models.Model):
     institution = models.CharField(max_length=255)
     location = models.CharField(max_length=255)
-    discipline = models.CharField(max_length=300)
+    course = models.CharField(max_length=300)
     award = models.CharField(max_length=10)
     description = models.TextField()
     start_date = models.DateField()
@@ -37,7 +37,7 @@ class Education(models.Model):
     still_in_progress = models.BooleanField(default=False)
     
     def __str__(self):
-        return f'{self.award} {self.discipline} from {self.institution}'
+        return f'{self.award} {self.course} from {self.institution}'
 
 
 class Project(models.Model):
