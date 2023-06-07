@@ -2,3 +2,5 @@ towerenv/
 .env
 __pycache__/
 htmlcov/
+wip*
+db.sqlite3
