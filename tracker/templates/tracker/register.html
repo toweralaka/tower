@@ -16,8 +16,8 @@
                     <form method="post">{% csrf_token %}
                         {% for field in form %} 
                         <div class="form-floating mb-3">
-                            {{ field.label_tag }}
                             {{ field }}
+                            {{ field.label_tag }}
                             {{ field.errors }}
                         </div>
                         {% endfor %}

@@ -16,8 +16,8 @@
                         {% for field in form %}
                         <div class="form-floating mb-3">
                             {{ field.errors }}
-                            {{ field.label_tag }}
                             {{ field }}
+                            {{ field.label_tag }}
                             {{ field.help_text }}
                         </div>
                         {% endfor %}

@@ -12,9 +12,9 @@
             </div>
 
             <h2>Prescription List</h2>
-            <ol>
+            <ol class="text-left">
                 {% for pres in object_list %}
-                <li>
+                <li class="text-left">
                     {{ pres.dosage }} {{ pres.dosage_unit }} of 
                     {{ pres.name}} {{ pres.frequency }} times a 
                     {{ pres.frequency_period }}
@@ -23,7 +23,7 @@
                 <li>You do not have prescriptions.</li>
                 {% endfor %}
             </ol>
-            <a href="{% url 'tracker:add' %}">Add New</a>
+            <a class="btn btn-primary" href="{% url 'tracker:add' %}">Add New</a>
         </div>
     </div>
 </section>
