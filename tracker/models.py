@@ -33,12 +33,13 @@ class Prescription(models.Model):
         blank=True, null=True, help_text='What the medication is meant for')
     dosage = models.DecimalField(default=1.0, max_digits=5, decimal_places=2)
     #decimal field to allow for fractions
-    dosage_unit = models.CharField(max_length=50)
+    dosage_unit = models.CharField(max_length=50, help_text='e.g: ml, capsule, tablet, shot')
     frequency = models.DecimalField(default=1.0, max_digits=5, decimal_places=2)
     #decimal field to allow for fractions
     frequency_period = models.CharField(max_length=7, choices=PERIOD)
     start_date = models.DateField(help_text='mm/dd/yyyy')
     end_date = models.DateField(help_text='mm/dd/yyyy')
+    total_dosage_unit_quantity = models.IntegerField(help_text='how many units of the dosage_unit')
 
     def __str__(self):
         return self.name
