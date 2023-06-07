@@ -2,7 +2,7 @@ from django.contrib.auth import login, authenticate, get_user_model
 # from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import TemplateView, ListView, View
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView
 from django.shortcuts import render, redirect
 
 from tracker.forms import RegisterForm, PrescriptionForm
@@ -33,17 +33,12 @@ class RegisterView(View):
         return render(request, 'tracker/register.html', {'form': form})
 
 
-
-
 class AddPrescriptionView(LoginRequiredMixin, CreateView):
     login_url = "/accounts/login/"
     redirect_field_name = "redirect_to"
     model = Prescription
     template_name = 'tracker/add_prescription.html'
     form_class = PrescriptionForm
-    # fields = [
-    #     'name', 'description', 'dosage', 'dosage_unit', 
-    #     'frequency', 'frequency_period', 'start_date', 'end_date']
     success_url = '/tracker/dashboard/'
 
     def form_valid(self, form):
@@ -52,8 +47,19 @@ class AddPrescriptionView(LoginRequiredMixin, CreateView):
         form.instance.user = self.request.user
         return super().form_valid(form)
 
-    
+
+class UpdatePrescriptionView(LoginRequiredMixin, UpdateView):
+    login_url = "/accounts/login/"
+    redirect_field_name = "redirect_to"
+    model = Prescription
+    template_name = 'tracker/update_prescription.html'
+    form_class = PrescriptionForm
+    success_url = '/tracker/dashboard/'
+
+
+
 class DashboardView(LoginRequiredMixin, ListView):
     login_url = "/accounts/login/"
     template_name = 'tracker/dashboard.html'
     model = Prescription
+    
