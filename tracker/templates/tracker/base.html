@@ -15,7 +15,7 @@
     {% endblock %}
 </head>
 
-<body class="d-flex h-100 text-center bg-gray">
+<body class="h-100 {% block body_class %}{% endblock %}">
     <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
         <symbol id="check2" viewBox="0 0 16 16">
             <path
@@ -105,7 +105,7 @@
         </header>
         {% block body %}
         {% endblock %}
-        <footer class="mt-auto {% block white_footer %}{% endblock %}">
+        <footer class="mt-auto text-center {% block white_footer %}{% endblock %}">
             <p>Cover template for <a href="https://getbootstrap.com/" class="text-white">Bootstrap</a>, by <a
                     href="https://twitter.com/mdo" class="text-white">@mdo</a>.</p>
         </footer>

@@ -5,7 +5,7 @@ from django.views.generic import TemplateView, ListView, View
 from django.views.generic.edit import CreateView
 from django.shortcuts import render, redirect
 
-from tracker.forms import RegisterForm
+from tracker.forms import RegisterForm, PrescriptionForm
 from tracker.models import Prescription
 
 User = get_user_model()
@@ -14,7 +14,7 @@ User = get_user_model()
 # Create your views here.
 
 class RegisterView(View):
-    success_url = '/dashboard/'
+    success_url = '/tracker/dashboard/'
 
     def get(self, request, *args, **kwargs):
         form = RegisterForm()
@@ -40,9 +40,10 @@ class AddPrescriptionView(LoginRequiredMixin, CreateView):
     redirect_field_name = "redirect_to"
     model = Prescription
     template_name = 'tracker/add_prescription.html'
-    fields = [
-        'name', 'description', 'dosage', 'dosage_unit', 
-        'frequency', 'frequency_period', 'start_date', 'end_date']
+    form_class = PrescriptionForm
+    # fields = [
+    #     'name', 'description', 'dosage', 'dosage_unit', 
+    #     'frequency', 'frequency_period', 'start_date', 'end_date']
     success_url = '/tracker/dashboard/'
 
     def form_valid(self, form):
