@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.core.mail import send_mail
 from django.db import models
+from django.urls import reverse
 from django.utils import timezone
 from dateutil.relativedelta import relativedelta
 # Create your models here.
@@ -74,12 +75,12 @@ class Prescription(models.Model):
         else:
             new_time = self.start_date
         return new_time
-
     
     def send_use_reminder(self):
         if not self.is_quitted:
-            new_reminder = self.prescriptionreminder_set.create()
-            reminder_link = reverse()
+            new_reminder = self.prescriptionreminder_set.create(
+                                prescribed_time=self.get_next_reminder)
+            reminder_link = reverse("tracker:reminder-use", args=(new_reminder.id,))
             try:
                 send_mail(
                     "Prescription Use Reminder",
@@ -115,12 +116,21 @@ class Prescription(models.Model):
 
 class PrescriptionReminder(models.Model):
     prescription = models.ForeignKey(Prescription, on_delete=models.CASCADE)
+    prescribed_time = models.DateTimeField()
     is_reminded = models.BooleanField(default=False)
     is_administered = models.BooleanField(default=False)
     reminder_time = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f'{self.prescription}'
+
+    def administer(self):
+        self.is_administered = True
+        self.save()
+
+    def discard(self):
+        self.is_administered = False
+        self.save()
 
 
 class PrescriptionRefill(models.Model):
