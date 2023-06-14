@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # third party
     'crispy_forms',
+    'django_q',
     # local
     'tracker',
     'resume',
@@ -150,3 +151,24 @@ MEDIA_ROOT = BASE_DIR / "media/"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Schedule prescription reminder
+Q_CLUSTER = {
+    "name": "olaide",
+    'timeout': 60,
+    'label': 'Django Q',
+    'max_attempts': 5,
+    "orm": "default",  # Use Django's ORM + database for broker
+}
+
+# EMAIL
+# ------------------------------------------------------------------------------
+# https://docs.djangoproject.com/en/dev/ref/settings/#email-backend
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+DEFAULT_FROM_EMAIL = config('EMAIL_HOST_USER')
+EMAIL_PORT = 465
+EMAIL_USE_SSL = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
