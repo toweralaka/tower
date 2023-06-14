@@ -1,7 +1,7 @@
 from django.urls import path
 from django.views.generic.base import TemplateView
 from tracker.views import (RegisterView, AddPrescriptionView, DashboardView,
-    UpdatePrescriptionView)
+    UpdatePrescriptionView, prescription_reminder, use_reminder, discard_reminder)
 
 app_name = 'tracker'
 
@@ -11,5 +11,8 @@ urlpatterns = [
     path('add', AddPrescriptionView.as_view(), name='add'),
     path('update/<int:pk>', UpdatePrescriptionView.as_view(), name='update'),
     path('dashboard/', DashboardView.as_view(), name='dashboard'),
+    path('reminder/<int:pk>/', prescription_reminder, name='reminder'),
+    path('reminder_discard/<int:pk>/', discard_reminder, name='reminder-discard'),
+    path('reminder_use/<int:pk>/', use_reminder, name='reminder-use')
 
 ]
