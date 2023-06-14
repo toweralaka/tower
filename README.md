@@ -42,3 +42,54 @@
    Keep the process running for as long as you're doing the development
    work.
 
+# To activate scheduler so schedules are performed
+1. Go to scheduled tasks model under the DJANGO Q application in the admin(https://{domain_name}/admin/django_q/schedule)
+2. Create scheduled tasks:
+   * Task to send prescription reminder emails
+      * 'Name' = any arbitrary value
+      * 'Func' = 'tracker.tasks.send_recent_reminder'
+      * Indicate how often you want the schedule to run:
+         e.g: ('Schedule type' = 'minutes', 'Minutes' = '2') means every 2 munites, django_q will look for active prescriptions and send those that are due
+      * Leave other default values and submit
+3. 
+   * IN DEVELOPMENT:
+      * open a new console
+      * start qcluster
+      ```console
+      $ ./manage.py start qcluster.service
+      ```
+   * IN PRODUCTION:
+      * Create a service for qcluster
+         * Open qcluster.service file
+         ```console
+         $ sudo nano /etc/systemd/system/qcluster.service
+         ```
+         * Edit service as follows:
+
+            [Unit]
+
+            Description=qcluster runner
+
+            After=network.target
+
+
+            [Service]
+
+            User=user
+
+            WorkingDirectory=/home/user/path_to_project
+
+            ExecStart=/home/user/path_to_project_env/bin/python manage.py qcluster
+
+
+            [Install]
+
+            WantedBy=multi-user.target
+      * Enable the service:
+         ```console
+         sudo systemctl enable qcluster.service
+         ```
+      * Start the service:
+         ```console
+         sudo systemctl start qcluster.service
+         ```

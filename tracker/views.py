@@ -1,12 +1,14 @@
 from django.contrib.auth import login, authenticate, get_user_model
-# from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 from django.views.generic import TemplateView, ListView, View
 from django.views.generic.edit import CreateView, UpdateView
-from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404, render, redirect
 
 from tracker.forms import RegisterForm, PrescriptionForm
-from tracker.models import Prescription
+from tracker.models import Prescription, PrescriptionReminder
 
 User = get_user_model()
     
@@ -63,3 +65,29 @@ class DashboardView(LoginRequiredMixin, ListView):
     template_name = 'tracker/dashboard.html'
     model = Prescription
     
+
+@login_required
+def prescription_reminder(request, pk):
+    reminder = get_object_or_404(PrescriptionReminder, pk=pk)
+    if request.user != reminder.prescription.user:
+        return HttpResponseRedirect(reverse("tracker:dashboard"))
+    reminder.administer()
+    return render(request, 'tracker/reminder.html', {"reminder": reminder})
+
+@login_required
+def use_reminder(request, pk):
+    reminder = get_object_or_404(PrescriptionReminder, pk=pk)
+    if request.user != reminder.prescription.user:
+        return HttpResponseRedirect(reverse("tracker:dashboard"))
+    reminder.administer()
+    return HttpResponseRedirect(
+        reverse("tracker:reminder", args=(reminder.id,)))
+
+@login_required
+def discard_reminder(request, pk):
+    reminder = get_object_or_404(PrescriptionReminder, pk=pk)
+    if request.user != reminder.prescription.user:
+        return HttpResponseRedirect(reverse("tracker:dashboard"))
+    reminder.discard()
+    return HttpResponseRedirect(
+        reverse("tracker:reminder", args=(reminder.id,)))
