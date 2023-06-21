@@ -1,6 +1,7 @@
-from django.urls import path, include
+from django.urls import include, path
 from django.views.generic.base import TemplateView
-from resume.views import resume, projects
+
+from resume.views import projects, resume
 
 # app_name = 'resume'
 

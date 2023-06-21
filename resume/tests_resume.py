@@ -1,7 +1,7 @@
-from django.test import Client, TestCase, RequestFactory
+from django.test import Client, RequestFactory, TestCase
 from django.urls import reverse
-
 from model_bakery import baker
+
 from .models import Bio, Education, Experience, Language, Project, Skill
 from .views import projects, resume
 

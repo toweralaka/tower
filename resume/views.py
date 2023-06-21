@@ -1,4 +1,5 @@
 from django.shortcuts import render
+
 from resume.models import Bio, Education, Experience, Language, Project, Skill
 
 # Create your views here.
