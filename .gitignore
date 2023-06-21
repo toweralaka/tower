@@ -4,4 +4,5 @@ __pycache__/
 htmlcov/
 wip*
 db.sqlite3
-
+.coverage
+.pytest_cache
