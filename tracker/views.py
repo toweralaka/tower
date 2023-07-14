@@ -1,13 +1,13 @@
-from django.contrib.auth import login, authenticate, get_user_model
+from django.contrib.auth import authenticate, get_user_model, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
+from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
-from django.views.generic import TemplateView, ListView, View
+from django.views.generic import ListView, TemplateView, View
 from django.views.generic.edit import CreateView, UpdateView
-from django.shortcuts import get_object_or_404, render, redirect
 
-from tracker.forms import RegisterForm, PrescriptionForm
+from tracker.forms import PrescriptionForm, RegisterForm
 from tracker.models import Prescription, PrescriptionReminder
 
 User = get_user_model()
@@ -64,6 +64,9 @@ class DashboardView(LoginRequiredMixin, ListView):
     login_url = "/accounts/login/"
     template_name = 'tracker/dashboard.html'
     model = Prescription
+
+    def get_queryset(self):
+        return Prescription.objects.filter(user=self.request.user)
     
 
 @login_required

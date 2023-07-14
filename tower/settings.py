@@ -11,8 +11,8 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
-from decouple import config, Csv
 
+from decouple import Csv, config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -29,8 +29,6 @@ DEBUG = config('DEBUG', cast=bool)
 
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
 
-
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -40,6 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # for site and flatpages
+    'django.contrib.flatpages',
+    'django.contrib.sites',
     # third party
     'crispy_forms',
     'django_q',
@@ -47,6 +48,9 @@ INSTALLED_APPS = [
     'tracker',
     'resume',
 ]
+
+# for site and flatpages
+SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -96,8 +100,6 @@ DATABASES = {
 
 # Dont save to database until all is well
 DATABASES["default"]["ATOMIC_REQUESTS"] = True
-
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
