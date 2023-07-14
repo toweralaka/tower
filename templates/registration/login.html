@@ -5,6 +5,8 @@
     <div class="container px-5">
         <div class="bg-light rounded-4 py-5 px-4 px-md-5">
             <h1>Login</h1>
+            {{ form.errors }}
+            
             <form method="post">{% csrf_token %}
                 <!-- Username input-->
                 <div class="form-floating mb-3">
@@ -16,7 +18,7 @@
                 <!-- Password input-->
                 <div class="form-floating mb-3">
                     <input class="form-control" id="id_password" type="password"
-                        data-sb-validations="required,email" />
+                        data-sb-validations="required,email" name="password" />
                     <label for="id_password">Password</label>
                 </div>
                 <input type="submit" class="btn btn-primary" value="Login">

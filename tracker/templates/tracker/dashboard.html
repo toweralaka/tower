@@ -7,7 +7,7 @@
             <div class="text-center mb-5">
                 <div class="feature bg-primary bg-gradient-primary-to-secondary text-white rounded-3 mb-3"><i
                         class="bi bi-envelope"></i></div>
-                <h1 class="fw-bolder">WELCOME</h1>
+                <h1 class="fw-bolder">WELCOME {{ request.user }}</h1>
                 <p class="lead fw-normal text-muted mb-0">Track your prescriptions!</p>
             </div>
 
@@ -16,7 +16,7 @@
                 {% for pres in object_list %}
                 <li class="text-left">
                     {{ pres.dosage }} {{ pres.dosage_unit }} of 
-                    {{ pres.name }} {{ pres.frequency }} times a 
+                    {{ pres.name }} every {{ pres.frequency }} 
                     {{ pres.frequency_period }} &nbsp; | &nbsp; 
                     <a class="btn btn-primary" href="{% url 'tracker:update' pres.pk %}">Update</a>
                 </li>
