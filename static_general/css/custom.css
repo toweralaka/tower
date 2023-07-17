@@ -1,5 +1,6 @@
 .role__label {
     font-size: 2rem;
+    word-spacing: 10px;
 }
 @media (max-width: 576px) {
   .role__label {
