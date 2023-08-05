@@ -2,8 +2,21 @@
     font-size: 2rem;
     word-spacing: 10px;
 }
+.flex_card_inner img{
+  width: 36%;
+}
+.flex_card_inner {
+  width: 64%;
+  height: 280px;
+}
 @media (max-width: 576px) {
   .role__label {
     font-size: 1.1rem;
+  }
+  .flex_card {
+    flex-direction: column-reverse;
+  }
+  .flex_card_inner {
+    width: 100%;
   }
 }

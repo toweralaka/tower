@@ -43,12 +43,12 @@ class Education(models.Model):
 class Project(models.Model):
     name = models.CharField(max_length=500)
     url = models.URLField()
+    repository = models.CharField(max_length=500)
     description = models.TextField()
     image = models.ImageField(blank=True, null=True)
 
     def __str__(self):
         return self.name
-
 
 
 class Skill(models.Model):
@@ -65,4 +65,3 @@ class Language(models.Model):
 
     def __str__(self):
         return self.name
-

@@ -1,5 +1,8 @@
 {% extends 'tracker/base.html' %}
-
+{% load static %}
+{% block custom_style %}
+<link href="{% static 'tracker/custom.css' %}" rel="stylesheet">
+{% endblock %}
 {% block body %}
 <section class="py-5">
     <div class="container px-5">
