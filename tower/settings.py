@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     # third party
     'crispy_forms',
+    'ckeditor',
+    'ckeditor_uploader',
     'django_q',
     # local
     'tracker',
@@ -92,7 +94,7 @@ WSGI_APPLICATION = 'tower.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': config('DB_ENGINE'),
-        'NAME': config('DB_NAME', default= BASE_DIR / 'db.sqlite3'),
+        'NAME': config('DB_NAME', default=BASE_DIR / 'db.sqlite3'),
         'USER': config('DB_USER'),
         'PASSWORD': config('DB_PASSWORD'),
         'HOST': config('DB_HOST'),
@@ -108,16 +110,24 @@ DATABASES["default"]["ATOMIC_REQUESTS"] = True
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        'NAME': (
+            'django.contrib.auth.password_validation'
+            '.UserAttributeSimilarityValidator'),
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'NAME': (
+            'django.contrib.auth.password_validation'
+            '.MinimumLengthValidator'),
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        'NAME': (
+            'django.contrib.auth.password_validation'
+            '.CommonPasswordValidator'),
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        'NAME': (
+            'django.contrib.auth.password_validation'
+            '.NumericPasswordValidator'),
     },
 ]
 
@@ -176,3 +186,170 @@ EMAIL_USE_SSL = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+
+
+CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"
+CKEDITOR_UPLOAD_PATH = "ckeditor/tower/"
+CKEDITOR_CONFIGS = {
+    'default': {
+        'skin': 'moono',
+        'toolbar_Basic': [
+            ['Source', '-', 'Bold', 'Italic']
+        ],
+        'toolbar_YourCustomToolbarConfig': [
+            {'name': 'document',
+             'items': ['Source',
+                       '-',
+                       'Save',
+                       'NewPage',
+                       'Preview',
+                       'Print',
+                       '-',
+                       'Templates']},
+            {'name': 'clipboard',
+             'items': ['Cut',
+                       'Copy',
+                       'Paste',
+                       'PasteText',
+                       'PasteFromWord',
+                       '-',
+                       'Undo',
+                       'Redo']},
+            {'name': 'editing', 'items': [
+                'Find', 'Replace', '-', 'SelectAll']},
+            {'name': 'forms',
+             'items': [
+                'Form', 'Checkbox', 'Radio', 'TextField', 'Textarea',
+                'Select', 'Button', 'ImageButton', 'HiddenField']},
+            '/',
+            {'name': 'basicstyles',
+             'items': [  # 'EqnEditor',
+                 'Bold', 'Italic', 'Underline', 'Strike', 'Subscript',
+                 'Superscript', '-', 'RemoveFormat']},
+            {'name': 'paragraph',
+             'items': [
+                'NumberedList', 'BulletedList', '-', 'Outdent',
+                'Indent', '-', 'Blockquote', 'CreateDiv', '-',
+                'JustifyLeft', 'JustifyCenter', 'JustifyRight',
+                'JustifyBlock', '-', 'BidiLtr', 'BidiRtl',
+                'Language']},
+            {'name': 'links', 'items': ['Link', 'Unlink', 'Anchor']},
+            {'name': 'insert',
+             'items': [
+                'Image', 'Flash', 'Table', 'HorizontalRule', 'Smiley',
+                'SpecialChar', 'PageBreak', 'Iframe']},
+            '/',
+            {'name': 'styles', 'items': [
+                'Styles', 'Format', 'Font', 'FontSize']},
+            {'name': 'colors', 'items': ['TextColor', 'BGColor']},
+            {'name': 'tools', 'items': ['Maximize', 'ShowBlocks']},
+            {'name': 'about', 'items': ['About']},
+            '/',  # put this to force next toolbar on new line
+            {'name': 'yourcustomtools', 'items': [
+                # put the name of your editor.ui.addButton here
+                'Preview',
+                'Maximize',
+
+            ]},
+            {'name': 'math', 'items': ['Mathjax', ]},
+        ],
+        'specialChars': [
+            '!', '&quot;', '#', '$', '%', '&amp;', "'", '(', ')',
+            '*', '+', '-', '.', '/',
+            '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', ':', ';',
+            '&lt;', '=', '&gt;', '?', '@',
+            'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K',
+            'L', 'M', 'N', 'O',
+            'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
+            '[', ']', '^', '_', '`',
+            'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k',
+            'l', 'm', 'n', 'o', 'p',
+            'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
+            '{', '|', '}', '~',
+            '&euro;', '&lsquo;', '&rsquo;', '&ldquo;', '&rdquo;',
+            '&ndash;', '&mdash;', '&iexcl;', '&cent;', '&pound;',
+            '&curren;', '&yen;', '&brvbar;', '&sect;', '&uml;',
+            '&copy;', '&ordf;', '&laquo;', '&not;', '&reg;', '&macr;',
+            '&deg;', '&sup2;', '&sup3;', '&acute;', '&micro;', '&para;',
+            '&middot;', '&cedil;', '&sup1;', '&ordm;', '&raquo;',
+            '&frac14;', '&frac12;', '&frac34;', '&iquest;', '&Agrave;',
+            '&Aacute;', '&Acirc;', '&Atilde;', '&Auml;', '&Aring;',
+            '&AElig;', '&Ccedil;', '&Egrave;', '&Eacute;', '&Ecirc;',
+            '&Euml;', '&Igrave;', '&Iacute;', '&Icirc;', '&Iuml;',
+            '&ETH;', '&Ntilde;', '&Ograve;', '&Oacute;', '&Ocirc;',
+            '&Otilde;', '&Ouml;', '&times;', '&Oslash;', '&Ugrave;',
+            '&Uacute;', '&Ucirc;', '&Uuml;', '&Yacute;', '&THORN;',
+            '&szlig;', '&agrave;', '&aacute;', '&acirc;', '&atilde;',
+            '&auml;', '&aring;', '&aelig;', '&ccedil;', '&egrave;',
+            '&eacute;', '&ecirc;', '&euml;', '&igrave;', '&iacute;',
+            '&icirc;', '&iuml;', '&eth;', '&ntilde;', '&ograve;',
+            '&oacute;', '&ocirc;', '&otilde;', '&ouml;', '&divide;',
+            '&oslash;', '&ugrave;', '&uacute;', '&ucirc;', '&uuml;',
+            '&yacute;', '&thorn;', '&yuml;', '&OElig;', '&oelig;',
+            '&#372;', '&#374', '&#373', '&#375;', '&sbquo;', '&#8219;',
+            '&bdquo;', '&hellip;', '&trade;', '&#9658;', '&bull;',
+            '&rarr;', '&rArr;', '&hArr;', '&diams;', '&asymp;', '&alpha;',
+            '&beta;', '&gamma;', '&delta;', '&epsilon;',
+            '&zeta;', '&eta;', '&theta;', '&iota;', '&kappa;', '&lambda;',
+            '&mu;', '&nu;', '&xi;', '&omicron;', '&pi;',
+            '&rho;', '&sigma;', '&tau;', '&upsilon;', '&phi;', '&chi;',
+            '&psi;', '&omega;', '&divide;', '&#9651;', '&#8869;',
+            '&#8773;', '&#8774;', '&#8373;', '&#8358;', '&#8211;',
+            '&#8722;', '&#440;', '&#8230;', '&#8216;', '&#8217;',
+            '&prime;', '&#8220;', '&#8221;', '&#601;', '&#257;', '&#281;',
+            '&#8728;', '&#10234;', '&#8706;', '&#241;',
+            '&#7778;', '&#507;', '&#7696;', '&#7717;', '&#363;', '&#8462;',
+            '&#299;', '&#650;', '&#8455;', '&#658;',
+            '&#652;', '&#618;', '&#712;', '&#720;', '&#596;', '&#594;',
+            '&#593;', '&#643;', '&#716;', '&#331;', '&#240;',
+            '&#8651;', '&harr;', '&ne;', '&radic;', '&odash;', '&otimes;'
+        ],
+        # put selected toolbar config here
+        'toolbar': 'YourCustomToolbarConfig',
+        'toolbarGroups': [
+            {
+                'name': 'document',
+                'groups': ['mode', 'document', 'doctools']}],
+        'height': 291,
+        'width': '100%',
+        'filebrowserWindowHeight': 725,
+        'filebrowserWindowWidth': 940,
+        'toolbarCanCollapse': True,
+        # mathjax display
+        'allowedContent': True,
+        # dont convert html entities
+        'entities_processNumerical': 'force',
+        'forceSimpleAmpersand': True,
+        # 'entities_latin': True,
+        'Mathjax': {
+            'tex': {
+                'inlineMath': [['$', '$'], ['\\(', '\\)']]
+            },
+            'svg': {
+                'fontCache': 'global'
+            }
+        },
+        'mathJaxLib': (
+            '//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js'
+            '?config=TeX-AMS_HTML'),
+        'tabSpaces': 4,
+        'extraPlugins': ','.join([
+            'uploadimage',  # the upload image feature
+            # your extra plugins here
+            'div',
+            'autolink',
+            'autoembed',
+            'embedsemantic',
+            'entities',
+            'autogrow',
+            'devtools',
+            'widget',
+            'lineutils',
+            'clipboard',
+            'dialog',
+            'dialogui',
+            'elementspath',
+            'mathjax',
+        ]),
+    }
+}
