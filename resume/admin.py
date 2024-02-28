@@ -10,3 +10,7 @@ admin.site.register(Experience)
 admin.site.register(Language)
 admin.site.register(Project)
 admin.site.register(Skill)
+
+admin.site.site_header = 'Tower Administration'
+admin.site.site_title = 'Tower Admin'
+admin.site.index_title = 'Admin Dashboard'

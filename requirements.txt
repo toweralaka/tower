@@ -3,3 +3,5 @@ Django==4.1
 django-crispy-forms==2.0
 Pillow==9.5.0
 python-decouple==3.8
+mysqlclient
+django_q
